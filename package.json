@@ -1,8 +1,8 @@
 {
-  "name": "actions-orchestration",
-  "version": "1.0.0",
-  "description": "Orchestrate the execution of any kind of actions with simplicity & flexibility.",
-  "main": "index.js",
+  "name": "ts-behave",
+  "version": "0.0.1",
+  "description": "A library about safely executing code at runtime and also at compile time, thank TypeScript!",
+  "main": "lib/index.js",
   "engines": {
     "node": ">=22"
   },
