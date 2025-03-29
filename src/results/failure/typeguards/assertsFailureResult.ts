@@ -1,6 +1,6 @@
 import type {IResult} from "../../IResult";
 import type {IFailureResult} from "../IFailureResult";
-import {assertsResultType, WrongResultTypeError} from "../../typeguards";
+import {WrongResultTypeError} from "../../typeguards";
 import {isFailureResult} from "./isFailureResult";
 
 /**
@@ -15,7 +15,7 @@ import {isFailureResult} from "./isFailureResult";
  * @param result The result object to asserts the '**failure**' of.
  * @throws {WrongResultTypeError} If the '**type**' key contains anything else than '**failure**'.
  */
-export function assertsFailureResult<TError extends any, TOutput extends any>(
+export function assertsFailureResult<TError, TOutput>(
     result: IResult<TOutput, TError>,
 ): asserts result is typeof result & IFailureResult<TError> {
     if (!isFailureResult(result)) {

@@ -13,7 +13,7 @@ import type {IFailureResult} from "../IFailureResult";
  * @param result {@link result|Result object} to check for '**failure**'.
  * @returns {boolean}
  */
-export function isFailureResult<TError extends any, TOutput extends any>(
+export function isFailureResult<TError, TOutput>(
     result: IResult<TOutput, TError>,
 ): result is typeof result & IFailureResult<TError> {
     if (result instanceof FailureResult) {
