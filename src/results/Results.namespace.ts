@@ -1,41 +1,91 @@
+import type {AsyncFunctionResult, FunctionResult, SyncFunctionResult} from "../functions/results/FunctionResult";
+import {assertsResultObject, isResultBaseObject} from "./base";
 import {assertsFailureResult, FailureResult, type IFailureResult, isFailureResult} from "./failure";
 import type {IResult} from "./IResult";
 import {assertsSuccessResult, isSuccessResult, type ISuccessResult, SuccessResult} from "./success";
 import {assertsResultType, isResultOfType} from "./typeguards";
 
 export namespace Results {
-    export type Interface<
-        TSuccess extends any = any,
-        TError extends any = any,
-    > = IResult<TSuccess, TError>;
+    /**
+     * Interface that represents a result object, maybe its a '**success**' or a '**failure**' one.
+     * @template {any} TSuccess Output data type in case of '**success**'.
+     * @template {any} TError Thrown error type in case of '**failure**'.
+     */
+    export type Type<
+        TData = any,
+        TError = any,
+        TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
+        TFailure extends IFailureResult<TError> = IFailureResult<TError>,
+    > = IResult<TData, TError, TSuccess, TFailure>;
 
-    /*export type FromFunction<
+    /**
+     * Result object after executing the given synchronous function.
+     */
+    export type ForSyncFunction<
+        TFunc extends (...args: any[]) => Exclude<ReturnType<TFunc>, Promise<any>>,
+        TError = Error
+    > = SyncFunctionResult<TFunc, TError>;
+
+    /**
+     * Result object after executing the given asynchronous function.
+     */
+    export type ForAsyncFunction<
+        TFunc extends (...args: any[]) => Promise<any>,
+        TError = Error
+    > = AsyncFunctionResult<TFunc, TError>;
+
+    /**
+     * Result object after executing the given function.
+     */
+    export type ForFunction<
         TFunc extends (...args: any[]) => any,
-        TErrorData extends any = any,
-    > = IResult<Awaited<ReturnType<TFunc>>, TErrorData>;*/
+        TError = Error
+    > = FunctionResult<TFunc, TError>;
 
+    /**
+     * Success result's type.
+     */
     export type Success<
-        TSuccessData extends any = any,
-    > = ISuccessResult<TSuccessData>;
+        TData = any,
+        TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
+    > = TSuccess;
 
+    /**
+     * Failure result's type.
+     */
     export type Failure<
-        TErrorData extends any = any,
-    > = IFailureResult<TErrorData>;
+        TError = any,
+        TFailure extends IFailureResult<TError> = IFailureResult<TError>,
+    > = TFailure;
 
-    // Classes
+    /**
+     * Success result's class.
+     */
     export const Success: typeof SuccessResult = SuccessResult;
+
+    /**
+     * Failure result's class.
+     */
     export const Failure: typeof FailureResult = FailureResult;
 
     // Success
+
     export const isSuccess: typeof isSuccessResult = isSuccessResult;
     export const assertsSuccess: typeof assertsSuccessResult = assertsSuccessResult;
 
     // Failure
+
     export const isFailure: typeof isFailureResult = isFailureResult;
     export const assertsFailure: typeof assertsFailureResult = assertsFailureResult;
 
     // Types
+
     export const isOfType: typeof isResultOfType = isResultOfType;
     export const assertsType: typeof assertsResultType = assertsResultType;
+
+    // Base
+
+    export const isObject: typeof isResultBaseObject = isResultBaseObject;
+    export const assertsObject: typeof assertsResultObject = assertsResultObject;
 }
 export default Results;
