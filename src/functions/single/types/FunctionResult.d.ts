@@ -1,4 +1,5 @@
 import type {IFailureResult, ISuccessResult} from "../../../results";
+import type {AsyncFunctionOutput, FunctionOutput, SyncFunctionOutput} from "./FunctionOutput";
 
 /**
  * Result object for the given synchronous function.
@@ -6,7 +7,7 @@ import type {IFailureResult, ISuccessResult} from "../../../results";
 export type SyncFunctionResult<
     TFunc extends (...args: any[]) => TData,
     TError,
-    TData extends Exclude<ReturnType<TFunc>, Promise<any>> = SyncFunctionOutput<TFunc>,
+    TData = SyncFunctionOutput<TFunc>,
     TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
     TFailure extends IFailureResult<TError> = IFailureResult<TError>,
 > = | TSuccess

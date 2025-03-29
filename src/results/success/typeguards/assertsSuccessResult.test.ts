@@ -1,8 +1,7 @@
 import {describe, expect, it} from "@jest/globals";
-
-import type {IResult} from "../../IResult";
+import {UnexpectedResultTypeError} from "../../errors";
 import {FailureResult} from "../../failure";
-import {UnexpectedResultTypeError} from "../../typeguards";
+import type {IResult} from "../../IResult";
 import {assertsSuccessResult} from "./assertsSuccessResult";
 
 describe("assertSuccess", () => {

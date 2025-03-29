@@ -8,11 +8,13 @@ import type {SyncFunctionOutput, SyncFunctionResult} from "../types";
  */
 export function executeSingleFunctionSync<
     TError,
-    TFunc extends (...args: any[]) => Exclude<ReturnType<TFunc>, Promise<any>>,
+    TFunc extends (...args: TParams) => TData,
+    TParams extends any[] = Parameters<TFunc>,
+    TData = Exclude<ReturnType<TFunc>, Promise<any>>,
 >(
     func: TFunc,
     ...args: Parameters<TFunc>
-): SyncFunctionResult<TFunc, TError> {
+): SyncFunctionResult<TFunc, TError, TData> {
     try {
         const output = func(...args);
         return new SuccessResult(output as SyncFunctionOutput<TFunc>);
