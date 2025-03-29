@@ -15,7 +15,7 @@ import {isSuccessResult} from "./isSuccessResult";
  * @param result
  * @throws {WrongResultTypeError} If the '**type**' key contains anything else than '**success**'.
  */
-export function assertsSuccessResult<TOutput extends any, TError extends any>(
+export function assertsSuccessResult<TOutput, TError>(
     result: IResult<TOutput, TError>,
 ): asserts result is typeof result & ISuccessResult<TOutput> {
     if (!isSuccessResult(result)) {

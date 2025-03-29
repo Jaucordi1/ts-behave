@@ -12,7 +12,7 @@ import {SuccessResult} from "../SuccessResult";
  * @param result {@link result|Result object} to check for '**success**'.
  * @returns {boolean}
  */
-export function isSuccessResult<TOutput extends any, TError extends any>(
+export function isSuccessResult<TOutput, TError>(
     result: IResult<TOutput, TError>,
 ): result is typeof result & ISuccessResult<TOutput> {
     if (result instanceof SuccessResult) {

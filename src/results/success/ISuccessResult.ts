@@ -1,14 +1,12 @@
+import type {IResultBase} from "../base";
+
 /**
  * Represents the '**success**' result of an execution.
  * @template {any} TOutput The execution's '**success**' output data.
  */
-export interface ISuccessResult<TOutput extends any> {
-    /**
-     * The type of result, '**success**' in this case.
-     */
-    type: "success";
+export interface ISuccessResult<TData> extends IResultBase<"success"> {
     /**
      * The execution's '**success**' output data.
      */
-    data: TOutput;
+    readonly data: TData;
 }

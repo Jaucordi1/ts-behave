@@ -1,3 +1,4 @@
+import {ResultBase} from "../base";
 import type {ISuccessResult} from "./ISuccessResult";
 
 /**
@@ -5,22 +6,17 @@ import type {ISuccessResult} from "./ISuccessResult";
  * @template {any} TOutput The execution's '**success**' output data.
  * @implements {ISuccessResult<TOutput>} Constrained to the {@link ISuccessResult|'**success**' result object interface}.
  */
-export class SuccessResult<TOutput> implements ISuccessResult<TOutput> {
-    /**
-     * The execution's '**success**' output data.
-     */
-    public readonly data: TOutput;
-
-    /**
-     * Type of result, '**success**' in this case.
-     */
-    public readonly type: "success" = "success";
-
+export class SuccessResult<TData> extends ResultBase<"SUCCESS"> implements ISuccessResult<TData> {
     /**
      * Construct a new '**success**' result object, passing the execution's output data.
      * @param {TOutput} data The execution's '**success**' output data.
      */
-    constructor(data: TOutput) {
-        this.data = data;
+    constructor(
+        /**
+         * The execution's '**success**' output data.
+         */
+        public readonly data: TData,
+    ) {
+        super("success");
     }
 }
