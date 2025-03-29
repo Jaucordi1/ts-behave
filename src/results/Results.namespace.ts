@@ -1,4 +1,3 @@
-import type {AsyncFunctionResult, FunctionResult, SyncFunctionResult} from "../functions/results/FunctionResult";
 import {assertsResultObject, isResultBaseObject} from "./base";
 import {assertsFailureResult, FailureResult, type IFailureResult, isFailureResult} from "./failure";
 import type {IResult} from "./IResult";
@@ -17,30 +16,6 @@ export namespace Results {
         TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
         TFailure extends IFailureResult<TError> = IFailureResult<TError>,
     > = IResult<TData, TError, TSuccess, TFailure>;
-
-    /**
-     * Result object after executing the given synchronous function.
-     */
-    export type ForSyncFunction<
-        TFunc extends (...args: any[]) => Exclude<ReturnType<TFunc>, Promise<any>>,
-        TError = Error
-    > = SyncFunctionResult<TFunc, TError>;
-
-    /**
-     * Result object after executing the given asynchronous function.
-     */
-    export type ForAsyncFunction<
-        TFunc extends (...args: any[]) => Promise<any>,
-        TError = Error
-    > = AsyncFunctionResult<TFunc, TError>;
-
-    /**
-     * Result object after executing the given function.
-     */
-    export type ForFunction<
-        TFunc extends (...args: any[]) => any,
-        TError = Error
-    > = FunctionResult<TFunc, TError>;
 
     /**
      * Success result's type.
