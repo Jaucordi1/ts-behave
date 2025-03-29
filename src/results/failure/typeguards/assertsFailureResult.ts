@@ -1,6 +1,6 @@
+import {UnexpectedResultTypeError} from "../../errors";
 import type {IResult} from "../../IResult";
 import type {IFailureResult} from "../IFailureResult";
-import {WrongResultTypeError} from "../../typeguards";
 import {isFailureResult} from "./isFailureResult";
 
 /**
@@ -13,12 +13,12 @@ import {isFailureResult} from "./isFailureResult";
  * @template {any} TError The given result execution's possible error thrown.
  * @template {any} TOutput The given result execution's possible data output data.
  * @param result The result object to asserts the '**failure**' of.
- * @throws {WrongResultTypeError} If the '**type**' key contains anything else than '**failure**'.
+ * @throws {UnexpectedResultTypeError} If the '**type**' key contains anything else than '**failure**'.
  */
 export function assertsFailureResult<TError, TOutput>(
     result: IResult<TOutput, TError>,
 ): asserts result is typeof result & IFailureResult<TError> {
     if (!isFailureResult(result)) {
-        throw new WrongResultTypeError("failure", result);
+        throw new UnexpectedResultTypeError("failure", result);
     }
 }

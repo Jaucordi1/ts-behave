@@ -1,6 +1,6 @@
+import {UnexpectedResultTypeError} from "../../errors";
 import type {ISuccessResult} from "../ISuccessResult";
 import type {IResult} from "../../IResult";
-import {WrongResultTypeError} from "../../typeguards";
 import {isSuccessResult} from "./isSuccessResult";
 
 /**
@@ -13,12 +13,12 @@ import {isSuccessResult} from "./isSuccessResult";
  * @template {any} TOutput
  * @template {any} TError
  * @param result
- * @throws {WrongResultTypeError} If the '**type**' key contains anything else than '**success**'.
+ * @throws {UnexpectedResultTypeError} If the '**type**' key contains anything else than '**success**'.
  */
 export function assertsSuccessResult<TOutput, TError>(
     result: IResult<TOutput, TError>,
 ): asserts result is typeof result & ISuccessResult<TOutput> {
     if (!isSuccessResult(result)) {
-        throw new WrongResultTypeError("success", result);
+        throw new UnexpectedResultTypeError("success", result);
     }
 }

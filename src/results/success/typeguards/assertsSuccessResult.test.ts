@@ -2,7 +2,7 @@ import {describe, expect, it} from "@jest/globals";
 
 import type {IResult} from "../../IResult";
 import {FailureResult} from "../../failure";
-import {WrongResultTypeError} from "../../typeguards";
+import {UnexpectedResultTypeError} from "../../typeguards";
 import {assertsSuccessResult} from "./assertsSuccessResult";
 
 describe("assertSuccess", () => {
@@ -11,7 +11,7 @@ describe("assertSuccess", () => {
         const error = new Error("test OK");
         const result = new FailureResult(error) as IResult<any, typeof error>;
         const test = () => assertsSuccessResult(result);
-        expect(test).toThrow(WrongResultTypeError);
+        expect(test).toThrow(UnexpectedResultTypeError);
     });
 
 });
