@@ -6,7 +6,7 @@ import type {GetTypeOf, TuplePlacementNumber, TypeOfOfType} from "../../types";
  * @template {any} TArg
  * @template {number} TIndex
  */
-export type IncompatibleArgumentException<
+export type IncompatibleArgumentErrorMessage<
     TExpectedArg extends any,
     TArg extends any,
     TValidArgs extends any[],

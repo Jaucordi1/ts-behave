@@ -1,8 +1,8 @@
 import type {TupleSizeWithOffset} from "../types";
 import type {
-    IncompatibleArgumentException,
-    IndexOutOfBoundsException,
-    MissingExpectedArgumentException,
+    IncompatibleArgumentErrorMessage,
+    IndexOutOfBoundsErrorMessage,
+    MissingExpectedArgumentErrorMessage,
 } from "./errors";
 
 /**
@@ -23,7 +23,7 @@ export type TupleExtendsExpected<
         // Given elements to validate : none, we're all good!
         ? TValidTuple
         // No more arguments expected but received some, error index out of bounds
-        : IndexOutOfBoundsException<
+        : IndexOutOfBoundsErrorMessage<
             [...TValidTuple, ...TExpectedTuple],
             TTuple[0],
             TupleSizeWithOffset<TValidTuple, TOffset>
@@ -38,25 +38,25 @@ export type TupleExtendsExpected<
                 // Add given one to valid ones and continue through remaining tuples
                 ? TupleExtendsExpected<TRestExpected, TRestGiven, TOffset, [...TValidTuple, TFirstGiven]>
                 // First given element doesn't extends first expected one, error incompatible argument
-                : IncompatibleArgumentException<
+                : IncompatibleArgumentErrorMessage<
                     TFirstExpected,
                     TFirstGiven,
                     TValidTuple,
                     TOffset
                 >
             // No elements in given tuple, error missing expected argument
-            : MissingExpectedArgumentException<
+            : MissingExpectedArgumentErrorMessage<
                 TFirstExpected,
                 TupleSizeWithOffset<TValidTuple, TOffset>
             >
         // No elements in expected tuple, error index out of bounds
         : TOffset["length"] extends 0
-            ? IndexOutOfBoundsException<
+            ? IndexOutOfBoundsErrorMessage<
                 [...TValidTuple, ...TExpectedTuple],
                 TTuple[0],
                 TupleSizeWithOffset<TValidTuple, TOffset>
             >
-            : IndexOutOfBoundsException<
+            : IndexOutOfBoundsErrorMessage<
                 [...TValidTuple, ...TExpectedTuple],
                 TTuple[0],
                 TupleSizeWithOffset<TValidTuple, TOffset>

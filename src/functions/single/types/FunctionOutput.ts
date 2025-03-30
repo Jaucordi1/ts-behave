@@ -2,7 +2,7 @@
  * Output data of the given synchronous function, never for asynchronous ones.
  */
 export type SyncFunctionOutput<T extends (...args: any[]) => any> =
-    T extends (...args: any[]) => (infer TReturned extends Exclude<ReturnType<T>, Promise<any>>)
+    T extends (...args: any[]) => infer TReturned | Promise<infer TReturned>
         ? TReturned
         : never;
 

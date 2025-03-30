@@ -72,3 +72,7 @@ export type TypeOfOfType<
             ? TCandidateTypeOf
             : TypeOfOfType<T, Rest>
         : never;
+
+export function getTypeOf<T>(arg: T): TypeOfOfType<T> {
+    return typeof arg as TypeOfOfType<T>;
+}

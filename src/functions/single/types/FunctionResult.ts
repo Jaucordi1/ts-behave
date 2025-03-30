@@ -1,17 +1,21 @@
 import type {IFailureResult, ISuccessResult} from "../../../results";
-import type {AsyncFunctionOutput, FunctionOutput, SyncFunctionOutput} from "./FunctionOutput";
+import type {PromiseIfAsync} from "../../types";
+import type {AsyncFunctionOutput, FunctionOutput} from "./FunctionOutput";
 
 /**
  * Result object for the given synchronous function.
  */
 export type SyncFunctionResult<
-    TFunc extends (...args: any[]) => TData,
+    TFunc extends (...args: any[]) => any,
     TError,
-    TData = SyncFunctionOutput<TFunc>,
+    TData extends FunctionOutput<TFunc> = FunctionOutput<TFunc>,
     TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
     TFailure extends IFailureResult<TError> = IFailureResult<TError>,
-> = | TSuccess
-    | TFailure;
+> = PromiseIfAsync<
+    | TSuccess
+    | TFailure,
+    TFunc
+>;
 
 /**
  * Result object for the given asynchronous function.
@@ -31,7 +35,7 @@ export type AsyncFunctionResult<
 export type FunctionResult<
     TFunc extends (...args: any[]) => any,
     TError,
-    TData = FunctionOutput<TFunc>,
+    TData extends FunctionOutput<TFunc> = FunctionOutput<TFunc>,
     TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
     TFailure extends IFailureResult<TError> = IFailureResult<TError>,
 > = TFunc extends (...args: any[]) => Promise<TData>

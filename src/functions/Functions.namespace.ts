@@ -13,8 +13,9 @@ export namespace Functions {
          * Result object after executing the given synchronous function.
          */
         export type Sync<
-            TFunc extends (...args: any[]) => Exclude<ReturnType<TFunc>, Promise<any>>,
-            TError = Error
+            TFunc extends (...args: any[]) => TData,
+            TError = Error,
+            TData = Exclude<ReturnType<TFunc>, Promise<any>>,
         > = SyncFunctionResult<TFunc, TError>;
 
         /**

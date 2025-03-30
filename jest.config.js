@@ -1,8 +1,14 @@
+const {createDefaultPreset} = require("ts-jest");
+
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 module.exports = {
-  testEnvironment: "node",
-  transform: {
-    "^.+.tsx?$": ["ts-jest",{}],
-  },
-  coverageDirectory: "./coverage/",
+    ...createDefaultPreset(),
+    verbose: true,
+    testEnvironment: "node",
+    transform: {
+        "^.+.tsx?$": ["ts-jest", {
+            tsconfig: "./tsconfig-tests.json",
+        }],
+    },
+    coverageDirectory: "./coverage/",
 };

@@ -1,5 +1,6 @@
 import {FailureResult, SuccessResult} from "../../../results";
-import type {SyncFunctionOutput, SyncFunctionResult} from "../types";
+import {isTypedPromise} from "../../../types";
+import type {FunctionOutput, SyncFunctionResult} from "../types";
 
 /**
  * Execute a single given function with its parameters and return a corresponding result object.
@@ -7,18 +8,23 @@ import type {SyncFunctionOutput, SyncFunctionResult} from "../types";
  * @param args
  */
 export function executeSingleFunctionSync<
-    TError,
-    TFunc extends (...args: TParams) => TData,
-    TParams extends any[] = Parameters<TFunc>,
-    TData = Exclude<ReturnType<TFunc>, Promise<any>>,
+    TFunc extends (...args: any[]) => any,
+    TError = Error,
+    TData extends FunctionOutput<TFunc> = FunctionOutput<TFunc>,
 >(
     func: TFunc,
     ...args: Parameters<TFunc>
 ): SyncFunctionResult<TFunc, TError, TData> {
     try {
-        const output = func(...args);
-        return new SuccessResult(output as SyncFunctionOutput<TFunc>);
+        const returned = func(...args);
+        if (isTypedPromise<ReturnType<TFunc>>(returned)) {
+            return returned
+                .then((output: TData) => new SuccessResult(output))
+                .catch((error: TError) => new FailureResult(error));
+        } else {
+            return new SuccessResult(returned) as SyncFunctionResult<TFunc, TError, TData>;
+        }
     } catch (error: any) {
-        return new FailureResult<TError>(error);
+        return new FailureResult<TError>(error) as SyncFunctionResult<TFunc, TError, TData>;
     }
 }
