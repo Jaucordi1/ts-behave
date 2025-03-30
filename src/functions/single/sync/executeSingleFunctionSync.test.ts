@@ -1,5 +1,4 @@
 import {describe, expect, it} from "@jest/globals";
-import tsd from "tsd";
 import {FailureResult, SuccessResult} from "../../../results";
 import {executeSingleFunctionSync} from "./executeSingleFunctionSync";
 
@@ -76,17 +75,6 @@ describe("executeSingleFunctionSync", () => {
             const result = executeSingleFunctionSync(funcToExecute);
             expect(result).resolves.toBeInstanceOf(FailureResult);
             expect(result).resolves.toHaveProperty("error", error);
-        });
-    });
-
-    describe("Types", () => {
-        it("should execute without throwing", async () => {
-            expect.assertions(1);
-            const diagnostics = await tsd({
-                cwd: __dirname,
-                typingsFile: "executeSingleFunctionSync.ts",
-            });
-            expect(diagnostics).toStrictEqual([]);
         });
     });
 

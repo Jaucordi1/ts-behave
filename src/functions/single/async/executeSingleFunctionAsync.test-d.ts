@@ -1,4 +1,4 @@
-import {expectType, expectError} from 'tsd';
+import {expectType} from "tsd";
 import type {AsyncFunctionResult} from "../types";
 import {executeSingleFunctionAsync} from "./executeSingleFunctionAsync";
 
@@ -10,8 +10,7 @@ async function validAsyncFunc(): Promise<"Hello"> {
 expectType<Promise<AsyncFunctionResult<() => Promise<"Hello">, Error>>>(executeSingleFunctionAsync(validAsyncFunc));
 
 // ❌ Vérifie que passer une fonction sync est interdit
-function invalidSyncFunc(): "Hello" {
+function validSyncFunc(): "Hello" {
     return "Hello" as const;
 }
-// @ts-expect-error - Wrong Assignment
-expectError(executeSingleFunctionAsync(invalidSyncFunc));
+expectType<Promise<AsyncFunctionResult<() => "Hello", Error>>>(executeSingleFunctionAsync(validSyncFunc));

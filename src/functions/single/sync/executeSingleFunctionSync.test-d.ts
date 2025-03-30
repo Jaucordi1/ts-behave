@@ -1,4 +1,4 @@
-import {expectType} from 'tsd';
+import {expectType} from "tsd";
 import type {IFailureResult, ISuccessResult} from "../../../results";
 import {executeSingleFunctionSync} from "./executeSingleFunctionSync";
 
