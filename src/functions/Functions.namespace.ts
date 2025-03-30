@@ -1,3 +1,4 @@
+import {executeMappedFunctionsAsync, executeMappedFunctionsSync} from "./mapped";
 import {executeMultipleFunctionsAsync, executeMultipleFunctionsSync} from "./multiple";
 import {
     type AsyncFunctionResult,
@@ -43,6 +44,11 @@ export namespace Functions {
     export namespace Multiple {
         export const executeAsync: typeof executeMultipleFunctionsAsync = executeMultipleFunctionsAsync;
         export const executeSync: typeof executeMultipleFunctionsSync = executeMultipleFunctionsSync;
+    }
+
+    export namespace Mapped {
+        export const executeAsync: typeof executeMappedFunctionsAsync = executeMappedFunctionsAsync;
+        export const executeSync: typeof executeMappedFunctionsSync = executeMappedFunctionsSync;
     }
 }
 export default Functions;
