@@ -1,5 +1,7 @@
 # TypeScript Behave
 
+## 🚧 **Work In Progress** 🚧
+
 ## How to install
 ```shell
 # Via npm
@@ -20,7 +22,7 @@ function helloWorld() {
 }
 
 // Safe execution
-const result = Functions.executeSync(helloWorld);
+const result = Functions.Single.executeSync(helloWorld);
 
 // Execution's result assertion usage (throw in case of failure result)
 Results.assertsSuccess(result);
