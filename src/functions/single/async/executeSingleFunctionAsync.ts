@@ -8,7 +8,7 @@ import type {AsyncFunctionResult} from "../types";
  */
 export async function executeSingleFunctionAsync<
     TError,
-    TFunc extends (...args: any[]) => Promise<any>,
+    TFunc extends (...args: any[]) => any,
 >(
     func: TFunc,
     ...args: Parameters<TFunc>

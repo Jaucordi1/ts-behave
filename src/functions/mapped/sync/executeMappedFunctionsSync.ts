@@ -9,7 +9,7 @@ export function executeMappedFunctionsSync<
     TParams extends any[],
     TError = Error,
 >(
-    functionsMapping: T
+    functionsMapping: T,
 ): MappedFunctionsSyncResults<T, TFunc, TParams, TError> {
     let results = {};
 
@@ -51,14 +51,4 @@ export function executeMappedFunctionsSync<
     }
 
     return results as MappedFunctionsSyncResults<T, TFunc, TParams, TError>;
-
-    /*return Object.entries(functionsMapping).reduce(
-        (results, [name, execution]) => {
-            const [process, ...params] = execution;
-            return Object.assign(results, {
-                [name]: executeSingleFunctionSync(process, ...params),
-            });
-        },
-        {} as MappedFunctionsResults<typeof functionsMapping, TError>,
-    );*/
 }

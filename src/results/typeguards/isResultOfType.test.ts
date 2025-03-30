@@ -1,7 +1,6 @@
 import {describe, expect, it} from "@jest/globals";
-
-import type {IResult} from "../IResult";
 import {FailureResult} from "../failure";
+import type {IResult} from "../IResult";
 import {SuccessResult} from "../success";
 import {isResultOfType} from "./isResultOfType";
 

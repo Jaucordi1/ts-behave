@@ -18,7 +18,7 @@ export class MissingExpectedArgumentError<
         expectedArgType: TypeOfOfType<TExpectedArg>,
         argIndex: TIndex,
         message: MissingExpectedArgumentErrorMessage<TExpectedArg, TIndex>
-            = `Missing expected '${expectedArgType}' argument at index ${argIndex}`,
+        = `Missing expected '${expectedArgType}' argument at index ${argIndex}`,
     ) {
         super(message);
     }

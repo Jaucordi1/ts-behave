@@ -14,11 +14,11 @@ export type MappedFunctionsAsyncResults<
             Exclude<
                 {
                     [Name in keyof T]: T[Name] extends FunctionExecutionType<infer Func extends TFunc>
-                        ? Record<
-                            Name,
-                            AsyncFunctionResult<Func, TError>
-                        >
-                        : never;
+                    ? Record<
+                        Name,
+                        AsyncFunctionResult<Func, TError>
+                    >
+                    : never;
                 }[keyof T],
                 undefined
             >

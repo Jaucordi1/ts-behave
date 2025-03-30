@@ -1,5 +1,5 @@
+import {ExpectedResultBaseObjectError} from "../../errors";
 import type {IResultBase} from "../IResultBase";
-import {ExpectedResultBaseObjectError} from "../../errors/ExpectedResultBaseObjectError";
 import {isResultBaseObject} from "./isResultBaseObject";
 
 export function assertsResultObject(value: unknown): asserts value is IResultBase {

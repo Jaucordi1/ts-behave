@@ -19,7 +19,7 @@ export type TuplePlacementNumber<
 
 export type TupleSize<
     TArr extends any[] | ReadonlyArray<any>,
-> = [...TArr] extends {length: infer TSize extends number}
+> = [...TArr] extends { length: infer TSize extends number }
     ? TSize
     : never;
 

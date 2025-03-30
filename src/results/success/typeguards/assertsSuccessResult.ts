@@ -1,6 +1,6 @@
 import {UnexpectedResultTypeError} from "../../errors";
-import type {ISuccessResult} from "../ISuccessResult";
 import type {IResult} from "../../IResult";
+import type {ISuccessResult} from "../ISuccessResult";
 import {isSuccessResult} from "./isSuccessResult";
 
 /**

@@ -17,5 +17,6 @@ export abstract class ResultBase<TType extends ResultTypeName> implements IResul
          * Result object's type.
          */
         public readonly type: ResultType[TType],
-    ) {}
+    ) {
+    }
 }

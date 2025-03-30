@@ -13,11 +13,11 @@ export type MappedFunctionsSyncResults<
         Exclude<
             {
                 [Name in keyof T]: T[Name] extends FunctionExecutionType<infer Func extends TFunc>
-                    ? Record<
-                        Name,
-                        SyncFunctionResult<Func, TError>
-                    >
-                    : never;
+                ? Record<
+                    Name,
+                    SyncFunctionResult<Func, TError>
+                >
+                : never;
             }[keyof T],
             undefined
         >

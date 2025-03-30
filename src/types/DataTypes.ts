@@ -1,7 +1,7 @@
 /**
  * Create a constant, at **runtime**, containing the result of a `typeof …` statement.
  */
-const RuntimeTypeOf = typeof '';
+const RuntimeTypeOf = typeof "";
 
 /**
  * Get an union type of each possible {@link RuntimeTypeOf|string returned by a runtime `typeof …` statement}.
@@ -41,10 +41,10 @@ const TypeOfInferFunctions = {
 type TypeOfInferFunctions = typeof TypeOfInferFunctions;
 type TypeOfMapping = Exclude<{
     [TType in keyof TypeOfInferFunctions]:
-        TypeOfInferFunctions[TType] extends (value: unknown) => value is infer TInferredType
-            ? TInferredType
-            : {__BRAND__: 'NEVER'};
-}, Record<keyof TypeOfInferFunctions, {__BRAND__: 'NEVER'}>>;
+    TypeOfInferFunctions[TType] extends (value: unknown) => value is infer TInferredType
+        ? TInferredType
+        : { __BRAND__: "NEVER" };
+}, Record<keyof TypeOfInferFunctions, { __BRAND__: "NEVER" }>>;
 export type TypeOfTypeOf<T extends TypeOf> = TypeOfMapping[T];
 
 /**

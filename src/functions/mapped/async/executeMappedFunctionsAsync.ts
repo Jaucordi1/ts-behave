@@ -1,6 +1,5 @@
 import {executeSingleFunctionAsync} from "../../single";
-import type {FunctionExecutionType} from "../types";
-import type {MappedFunctionsAsyncResults} from "../types/MappedFunctionsAsyncResults";
+import type {FunctionExecutionType, MappedFunctionsAsyncResults} from "../types";
 
 export async function executeMappedFunctionsAsync<
     T extends Record<TName, TExecution>,
@@ -10,7 +9,7 @@ export async function executeMappedFunctionsAsync<
     TParams extends any[],
     TError = Error,
 >(
-    functionsMapping: T
+    functionsMapping: T,
 ): MappedFunctionsAsyncResults<T, TFunc, TParams, TError> {
     let results = {};
 
@@ -52,14 +51,4 @@ export async function executeMappedFunctionsAsync<
     }
 
     return results as MappedFunctionsAsyncResults<T, TFunc, TParams, TError>;
-
-    /*return Object.entries(functionsMapping).reduce(
-        (results, [name, execution]) => {
-            const [process, ...params] = execution;
-            return Object.assign(results, {
-                [name]: executeSingleFunctionSync(process, ...params),
-            });
-        },
-        {} as MappedFunctionsResults<typeof functionsMapping, TError>,
-    );*/
 }
