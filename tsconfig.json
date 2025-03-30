@@ -1,16 +1,16 @@
 {
-  "files": ["./src/index.ts"],
+  "include": ["src"],
+  "exclude": ["**/*.test.ts"],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "esModuleInterop": true,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext"],
     "declaration": true,
-    "declarationDir": "./dist/types",
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "moduleResolution": "node",
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "outDir": "./dist/lib",
-    "downlevelIteration": true
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "rootDir": "src"
   }
 }

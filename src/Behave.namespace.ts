@@ -1,8 +1,11 @@
-import InternalFunctions from "./functions";
-import InternalResults from "./results";
+import {Functions} from "./functions";
+import {Results} from "./results";
 
-export namespace Behave {
-    export import Functions = InternalFunctions;
-    export import Results = InternalResults;
-}
-export default Behave;
+export {
+    Functions,
+    Results,
+};
+export default {
+    Functions,
+    Results,
+};

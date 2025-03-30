@@ -2,16 +2,14 @@
   "name": "ts-behave",
   "version": "0.0.1",
   "description": "A library about safely executing code at runtime and also at compile time, thank TypeScript!",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
-  "engines": {
-    "node": ">=22"
-  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "test": "jest",
     "coverage": "jest --collect-coverage",
-    "prebuild": "rm -rf ./dist",
-    "build": "tsc --project tsconfig.json",
+    "build": "tsup",
     "start": "npm run build -- --watch"
   },
   "author": {
@@ -27,6 +25,7 @@
     "prettier": "^3.5.2",
     "ts-jest": "^29.2.5",
     "tsd": "^0.31.2",
+    "tsup": "^8.4.0",
     "typescript": "^5.7.3"
   }
 }
