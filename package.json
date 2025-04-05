@@ -1,6 +1,6 @@
 {
   "name": "ts-behave",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A library about safely executing code at runtime and also at compile time, thank TypeScript!",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
