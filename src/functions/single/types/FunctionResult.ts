@@ -28,16 +28,3 @@ export type AsyncFunctionResult<
     TFailure extends IFailureResult<TError> = IFailureResult<TError>,
 > = | TSuccess
     | TFailure;
-
-/**
- * Result object for the given function.
- */
-export type FunctionResult<
-    TFunc extends (...args: any[]) => any,
-    TError,
-    TData extends FunctionOutput<TFunc> = FunctionOutput<TFunc>,
-    TSuccess extends ISuccessResult<TData> = ISuccessResult<TData>,
-    TFailure extends IFailureResult<TError> = IFailureResult<TError>,
-> = TFunc extends (...args: any[]) => Promise<TData>
-    ? AsyncFunctionResult<TFunc, TError, TData, TSuccess, TFailure>
-    : SyncFunctionResult<TFunc, TError, TData, TSuccess, TFailure>;

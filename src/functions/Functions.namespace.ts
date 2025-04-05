@@ -1,10 +1,11 @@
 import {executeMappedFunctionsAsync, executeMappedFunctionsSync} from "./mapped";
 import {executeMultipleFunctionsAsync, executeMultipleFunctionsSync} from "./multiple";
+import {executeSequenceFunctionsSync} from "./sequence";
+import {executeSequenceFunctionsAsync} from "./sequence/async";
 import {
     type AsyncFunctionResult,
     executeSingleFunctionAsync,
     executeSingleFunctionSync,
-    type FunctionResult,
     type SyncFunctionResult,
 } from "./single";
 
@@ -33,7 +34,7 @@ export namespace Functions {
         export type Type<
             TFunc extends (...args: any[]) => any,
             TError = Error
-        > = FunctionResult<TFunc, TError>;
+        > = AsyncFunctionResult<TFunc, TError>;
     }
 
     export namespace Single {
@@ -49,6 +50,11 @@ export namespace Functions {
     export namespace Mapped {
         export const executeAsync: typeof executeMappedFunctionsAsync = executeMappedFunctionsAsync;
         export const executeSync: typeof executeMappedFunctionsSync = executeMappedFunctionsSync;
+    }
+
+    export namespace Sequence {
+        export const executeAsync: typeof executeSequenceFunctionsAsync = executeSequenceFunctionsAsync;
+        export const executeSync: typeof executeSequenceFunctionsSync = executeSequenceFunctionsSync;
     }
 }
 export default Functions;
