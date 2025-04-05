@@ -1,6 +1,6 @@
 import type {IResult} from "../../results";
+import {extractEachFunctionsExecution} from "../multiple";
 import {executeSingleFunctionSync} from "../single";
-import {extractSingleFunctionExecution} from "./extractSingleFunctionExecution";
 import type {SequenceFunctionsExecutions, SequenceFunctionsFromExecutions} from "./types";
 
 export function getSequenceFromFunctionsExecutions<
@@ -11,7 +11,7 @@ export function getSequenceFromFunctionsExecutions<
 ): SequenceFunctionsFromExecutions<T, TError> {
     const wrappedFunctions = [];
 
-    for (const singleExecution of extractSingleFunctionExecution<T>(executions)) {
+    for (const singleExecution of extractEachFunctionsExecution(executions)) {
         if (wrappedFunctions.length === 0) {
             const [func, ...params] = singleExecution;
             wrappedFunctions.push(

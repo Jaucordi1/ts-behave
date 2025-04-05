@@ -1,6 +1,6 @@
-import type {IFailureResult, IResult, ISuccessResult} from "../../../results";
+import type {IResult} from "../../../results";
 
-export type InferResultType<
+/*export type InferResultType<
     TResult extends IResult<TData, TError, TSuccess, TFailure>,
     TData
         = TResult extends ISuccessResult<infer TData> ? TData : never,
@@ -11,7 +11,7 @@ export type InferResultType<
     TFailure extends IFailureResult<TError>
         = TResult extends infer TResult extends IFailureResult<TError> ? TResult : never,
 > = | TSuccess
-    | TFailure;
+    | TFailure;*/
 
 export type MakeResultsTuple<
     T extends any[],
@@ -25,12 +25,12 @@ export type MakeResultsTuple<
             ? MakeResultsTuple<
                 Rest,
                 TError,
-                [...TResults, Promise<InferResultType<IResult<TOutput, TError>>>]
+                [...TResults, Promise<IResult<TOutput, TError>>]
             >
             // SYNC
             : MakeResultsTuple<
                 Rest,
                 TError,
-                [...TResults, InferResultType<IResult<First, TError>>]
+                [...TResults, IResult<First, TError>]
             >
         : never;

@@ -1,6 +1,6 @@
-import {GetLastListItem} from "../../../types";
+import type {GetLastListItem} from "../../../types";
 import type {AsyncFunctionResult, SyncFunctionResult} from "../../single";
-import {HasPromise} from "../../types";
+import type {HasPromise} from "../../types";
 
 export type SequenceFunctionsResults<
     TFunctions extends ((...args: any[]) => any)[],

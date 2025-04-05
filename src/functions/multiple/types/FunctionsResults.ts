@@ -1,19 +1,27 @@
-import type {FunctionsOutputs} from "./FunctionsOutputs";
-import type {MakeResultsTuple} from "./MakeResultsTuple";
+import type {AsyncFunctionResult, SyncFunctionResult} from "../../single";
+import type {HasPromise} from "../../types";
 
 /**
  * Tuple of given functions tuple's result objects.
  */
 export type FunctionsResults<
-    T extends ((...args: any[]) => TData)[],
-    TError = Error,
-    TOutputs extends FunctionsOutputs<T> = FunctionsOutputs<T>,
-    TData = TOutputs[number],
+    TFunctions extends ((...args: any[]) => any)[],
+    TError,
     TResults extends any[]
         = [],
-> = T extends [] ? TResults :
-    T extends [infer TFunc]
-        ? FunctionsOutputs<T> extends [...infer TOutputs]
-            ? MakeResultsTuple<TOutputs, TError>
-            : never
+> = TFunctions extends [] ? TResults :
+    TFunctions extends [infer TFunc extends TFunctions[number], ...infer Rest extends TFunctions[number][]]
+        ? HasPromise<[ReturnType<TFunc>]> extends true
+            // ASYNC
+            ? FunctionsResults<
+                Rest,
+                TError,
+                [...TResults, SyncFunctionResult<TFunc, TError>]
+            >
+            // SYNC
+            : FunctionsResults<
+                Rest,
+                TError,
+                [...TResults, AsyncFunctionResult<TFunc, TError>]
+            >
         : never;

@@ -5,6 +5,7 @@ module.exports = {
     ...createDefaultPreset(),
     verbose: true,
     testEnvironment: "node",
+    roots: ['./src/'],
     transform: {
         "^.+.tsx?$": ["ts-jest", {
             tsconfig: "./tsconfig-tests.json",
